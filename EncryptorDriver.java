@@ -63,7 +63,7 @@ public class EncryptorDriver {
             bfi.writeToFile(econ);
             c = rfi.readInputFile();
         }
-        audit.SendENOK(teamName, "Encrypt Successful", false);
+        audit.SendEOK(teamName, "Encrypt Successful", false);
         rfi.closeInFile();
         bfi.closeOutFile();
         scan.close();
