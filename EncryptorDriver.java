@@ -53,6 +53,12 @@ public class EncryptorDriver {
         RedFileInterface rfi  = new RedFileInterface();
         BlackFileInterface bfi = new BlackFileInterface();
 
+        System.out.print("Wheel 1 Pos: ");
+        facade.setWheel1Pos(scan.nextInt());
+        System.out.print("Wheel 2 Pos: ");
+        facade.setWheel2Pos(scan.nextInt());
+        System.out.print("Wheel 3 Pos: ");
+        facade.setWheel3Pos(scan.nextInt());
 
         System.out.print("File to Encrypt: ");
         rfi.openForRead(scan.nextLine());
