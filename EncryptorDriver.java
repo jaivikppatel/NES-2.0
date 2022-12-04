@@ -53,6 +53,7 @@ public class EncryptorDriver {
         RedFileInterface rfi  = new RedFileInterface();
         BlackFileInterface bfi = new BlackFileInterface();
 
+
         System.out.print("File to Encrypt: ");
         rfi.openForRead(scan.nextLine());
         bfi.openForWrite("MyOutFile.dat");
@@ -70,6 +71,8 @@ public class EncryptorDriver {
     }
 
     static void decryptOption(){
+        audit.FreeText(teamName, "Decryption Option Select!", false);
+        Scanner scan = new Scanner(System.in);
 
     }
 }

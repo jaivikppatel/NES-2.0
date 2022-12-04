@@ -4,7 +4,7 @@ package EncryptorSubsystem;
 // @author Bill Phillips
 //
 //
-public class PlugBoard 
+public class PlugBoard
 {
-   public int convert(int i) {return i;}   
+    public int convert(int i) {return i;}
 }
