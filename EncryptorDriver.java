@@ -3,7 +3,6 @@ import FileInterfacePackage.RedFileInterface;
 import FileInterfacePackage.BlackFileInterface;
 import P2PInterfacePackage.*;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class EncryptorDriver {
@@ -32,26 +31,13 @@ public class EncryptorDriver {
         } while (!authFlag);
         audit.SendLOK(teamName, "Logged In!", false);
 
-
-        System.out.println("MAIN MENU");
-        System.out.println("1 --> Encrypt");
-        System.out.println("2 --> Decrypt");
-        System.out.println("Other --> Exit");
-        System.out.print("Choice? ");
-        int choice = scan.nextInt();
-
-        switch (choice) {
-            case 1 -> encryptOption();
-            case 2 -> decryptOption();
-            default -> System.exit(0);
-        }
-
         mainMenu();
     }
 
     static void mainMenu(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("MAIN MENU");
+        System.out.println("\n\nMAIN MENU");
+        System.out.println("------------------");
         System.out.println("1 --> Encrypt");
         System.out.println("2 --> Decrypt");
         System.out.println("Other --> Exit");
@@ -73,8 +59,7 @@ public class EncryptorDriver {
         RedFileInterface rfi  = new RedFileInterface();
         BlackFileInterface bfi = new BlackFileInterface();
 
-        System.out.print("File to Encrypt: ");
-        rfi.openForRead(scan.nextLine());
+        rfi.openForRead("MyInFile.txt");
 
         System.out.print("Wheel 1 Pos: ");
         facade.setWheel1Pos(scan.nextInt());
@@ -93,12 +78,9 @@ public class EncryptorDriver {
         }
         audit.SendEOK(teamName, "Encrypt Successful", false);
         System.out.print("Wheel Positions are ");
-        System.out.print(facade.getWheel1Pos());
-        System.out.print(facade.getWheel2Pos());
-        System.out.println(facade.getWheel3Pos());
+        System.out.println(facade.getWheel1Pos() + " " + facade.getWheel2Pos() + " " + facade.getWheel3Pos());
         rfi.closeInFile();
         bfi.closeOutFile();
-        scan.close();
         mainMenu();
     }
 
@@ -118,7 +100,7 @@ public class EncryptorDriver {
 
         bfi.openForRead("MyOutFile.dat");
         int i = bfi.readFromFile();
-        while (bfi.EOF() == false){
+        while (!bfi.EOF()){
             rfi.addToBuf(i);
             i = bfi.readFromFile();
         }
@@ -126,19 +108,21 @@ public class EncryptorDriver {
 
         rfi.openForWrite("MyOutFile.txt");
 
-        while (rfi.emptyBuf() == false){
+        while (!rfi.emptyBuf()){
             int j = rfi.removeFromBuf();
             j = facade.decrypt(j);
             rfi.addToRevBuf(j);
         }
 
         char ch;
-        while (rfi.emptyRevBuf() == false){
+        while (!rfi.emptyRevBuf()){
             int k = rfi.removeFromRevBuf();
             ch = rfi.unConvert(k);
             rfi.writeToFile(ch);
         }
+        rfi.closeOutFile();
         audit.SendDOK(teamName, "Decryption SuccessFul!", false);
+
         mainMenu();
     }
 }
