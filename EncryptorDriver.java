@@ -2,8 +2,14 @@ import EncryptorSubsystem.EncryptorFacade;
 import FileInterfacePackage.RedFileInterface;
 import FileInterfacePackage.BlackFileInterface;
 import P2PInterfacePackage.*;
-
 import java.util.Scanner;
+
+//
+//EncryptorDriver.java by:
+//Hardi Patel (Team Lead)
+//Aayushi Shah (Team Member)
+//Jaivik Patel (Team Member)
+//Meghan Borad (Team Member)
 
 public class EncryptorDriver {
     static AuditInterfaceFactory auditFac = new AuditInterfaceFactory();
